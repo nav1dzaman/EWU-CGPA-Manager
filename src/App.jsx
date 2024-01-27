@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Header from "./assets/comps/Header";
+import AddCourse from "./assets/comps/AddCourse";
+import CourseList from "./assets/comps/CourseList";
+import Footer from "./assets/comps/Footer";
+import ShowCg from "./assets/comps/ShowCg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  document.title = "EWU Cgpa Calculator";
+
+  const [courselist, setCourseList] = useState([
+  
+  ]);
+  const [coursecode, setCourseCode] = useState("");
+  const [coursecredit, setCourseCredit] = useState("3");
+  const [coursegrade, setCoursegrade] = useState("F_OLD");
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+      <div className="main">
+        <ShowCg />
+        <AddCourse
+          courselist={courselist}
+          setCourseList={setCourseList}
+          coursecode={coursecode}
+          setCourseCode={setCourseCode}
+          coursecredit={coursecredit}
+          setCourseCredit={setCourseCredit}
+          coursegrade={coursegrade}
+          setCoursegrade={setCoursegrade}
+        />
+        <CourseList
+        courselist={courselist}
+        setCourseList={setCourseList}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
