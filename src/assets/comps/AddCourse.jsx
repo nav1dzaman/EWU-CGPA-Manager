@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddCourse.css";
 
 function AddCourse({
@@ -10,8 +10,9 @@ function AddCourse({
   setCourseCredit,
   coursegrade,
   setCoursegrade,
-  currentcourse, 
-  setCurrentCourse
+  current,
+  setCurrent
+  
 }) {
   function handlereset() {
     setCourseCode("");
@@ -32,9 +33,9 @@ function AddCourse({
     };
 
     setCourseList([...courselist, sheet]);
-    // console.log(courselist)
+  
 
-    // console.log(coursecode)
+
     console.log(typeof sheet.credit);
     // console.log(typeof(second))
   };
@@ -49,6 +50,7 @@ function AddCourse({
           type="text"
           onChange={(e) => {
             setCourseCode(e.target.value);
+         //  setCurrent({code:e.target.value || " "})
           }}
           name="coursecode"
           id="coursecode"
@@ -61,7 +63,8 @@ function AddCourse({
         <select
           className="border-2"
           onChange={(e) => {
-            setCourseCredit(e.target.value);
+           // setCourseCredit(e.target.value);
+           //setCurrent({credit:e.target.value})
           }}
           value={coursecredit}
         >

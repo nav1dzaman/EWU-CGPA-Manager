@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./assets/comps/Header";
 import AddCourse from "./assets/comps/AddCourse";
 import CourseList from "./assets/comps/CourseList";
@@ -7,13 +7,20 @@ import ShowCg from "./assets/comps/ShowCg";
 import "./App.css";
 
 function App() {
-  document.title = "EWU Cgpa Calculator";
+  document.title = "EWU Cgpa Manager";
 
-  const [courselist, setCourseList] = useState([]);
+  const [courselist, setCourseList] = useState(JSON.parse(localStorage.getItem("courselist")) || []);
   const [coursecode, setCourseCode] = useState("");
   const [coursecredit, setCourseCredit] = useState("3");
   const [coursegrade, setCoursegrade] = useState("F_OLD");
-  const [currentcourse, setCurrentCourse] = useState({});
+  const [current, setCurrent] = useState({
+    code:" "
+  });
+
+  useEffect(()=>{
+      localStorage.setItem("courselist",JSON.stringify(courselist));
+  },[courselist]);
+
 
   return (
     <>
@@ -29,8 +36,9 @@ function App() {
           setCourseCredit={setCourseCredit}
           coursegrade={coursegrade}
           setCoursegrade={setCoursegrade}
-          currentcourse={currentcourse}
-          setCurrentCourse={setCurrentCourse}
+          current={current}
+          setCurrent={setCurrent}
+     
         />
         <CourseList 
         courselist={courselist} 
@@ -41,6 +49,9 @@ function App() {
           setCourseCredit={setCourseCredit}
           coursegrade={coursegrade}
           setCoursegrade={setCoursegrade}
+          current={current}
+          setCurrent={setCurrent}
+       
         />
       </div>
       <Footer />
